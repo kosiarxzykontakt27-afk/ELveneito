@@ -14,7 +14,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 import net.minecraft.client.gui.DrawContext;
@@ -393,10 +392,10 @@ public final class Builtins {
             if (!(p.getMainHandStack().getItem() instanceof BlockItem)) return;
             BlockPos below = p.getBlockPos().down();
             if (!mc.world.getBlockState(below).isAir()) return;
-            for (Direction d : Direction.values()) {
+            for (net.minecraft.util.math.Direction d : net.minecraft.util.math.Direction.values()) {
                 BlockPos n = below.offset(d);
                 if (mc.world.getBlockState(n).isAir()) continue;
-                Direction face = d.getOpposite();
+                net.minecraft.util.math.Direction face = d.getOpposite();
                 BlockPos o = n.offset(face);
                 Vec3d pos = Vec3d.ofCenter(n).add((o.getX() - n.getX()) * 0.5, (o.getY() - n.getY()) * 0.5, (o.getZ() - n.getZ()) * 0.5);
                 mc.interactionManager.interactBlock(p, Hand.MAIN_HAND, new BlockHitResult(pos, face, n, false));
@@ -423,7 +422,7 @@ public final class Builtins {
                 if (d < bd) { bd = d; best = pos; }
             }
             if (best != null) {
-                mc.interactionManager.updateBlockBreakingProgress(best, Direction.UP);
+                mc.interactionManager.updateBlockBreakingProgress(best, net.minecraft.util.math.Direction.UP);
                 p.swingHand(Hand.MAIN_HAND);
             }
         }
