@@ -397,7 +397,8 @@ public final class Builtins {
                 BlockPos n = below.offset(d);
                 if (mc.world.getBlockState(n).isAir()) continue;
                 Direction face = d.getOpposite();
-                Vec3d pos = Vec3d.ofCenter(n).add(face.getOffsetX() * 0.5, face.getOffsetY() * 0.5, face.getOffsetZ() * 0.5);
+                BlockPos o = n.offset(face);
+                Vec3d pos = Vec3d.ofCenter(n).add((o.getX() - n.getX()) * 0.5, (o.getY() - n.getY()) * 0.5, (o.getZ() - n.getZ()) * 0.5);
                 mc.interactionManager.interactBlock(p, Hand.MAIN_HAND, new BlockHitResult(pos, face, n, false));
                 p.swingHand(Hand.MAIN_HAND);
                 return;
